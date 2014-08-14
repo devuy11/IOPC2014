@@ -1,0 +1,56 @@
+Given an infinite array whose period is S(<=1000) (say the array be A[]), and a zero initialised array B[] of size N<=1e5.
+
+Total Queries<=1e5
+
+There are 2 types of Queries ::
+U x y M ::
+
+for (int i=x; i<=y;i++)        B[i]  =   A[ M + i -  x ]     //Assuming 1 indexed A,B
+
+Q x y ::
+Find Max { B[i]+B[i+1]+...+B[j] ; x ≤ i ≤ j ≤ y }.
+
+Input Format::
+
+First Line contains 3 space separated integers (S N Q)
+
+Next Line Contains S integers separated by space
+
+Next Follow Q Queries from either of the 2 forms ( U x y M OR  Q x y )
+
+Output Format::
+
+Output for only queries starting with Q . After each query put a enter.
+
+Sample Input::
+
+5 10 4
+10 -6 -7 11 12
+U 1 5 3
+Q 2 4
+U 2 9 3
+Q 3 9
+
+Sample Output::
+
+33
+43
+
+Explanation::
+
+
+Initially :: 0 0 0 0 0 0 0 0 0 0
+After Update 1 5 3 :: -7 11 12 10 -6 0 0 0 0 0
+Query for array :: 11 12 10  --> Answer is 33
+After Update 2 9 3 :: -7 -7 11 12 10 -6 -7 11 12 0
+Query for array :: 11 12 10 -6 -7 11 12  --> Answer is 43
+
+ 
+
+Note :: 3 solutions
+
+1. Brute Force :
+
+2. n*log(n) *log(n) --> Top Speed 8 sec
+
+3. c*n*log(n)  ---> Top Speed 1.1 sec

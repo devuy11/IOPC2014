@@ -1,0 +1,373 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <cstdio>
+#include <cmath>
+#include <cstring>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
+#include <string>
+#include <vector>
+#include <set>
+#include <map>
+#include <list>
+#include <complex>
+#include <queue>
+
+#ifdef ONLINE_JUDGE
+#include <sys/resource.h>
+#else
+#pragma comment(linker, "/STACK:266777216")
+#endif
+
+using std::min;
+using std::max;
+using std::swap;
+using std::make_pair;
+using std::sort;
+using std::cin;
+using std::cout;
+//using std::endl;
+using std::lower_bound;
+using std::upper_bound;
+using std::queue;
+using std::next_permutation;
+using std::pair;
+using std::string;
+using std::vector;
+using std::set;
+using std::map;
+//using namespace std;
+
+#define assert(f) { if(!(f)) { fprintf(stderr,"Assertion failed: "); fprintf(stderr,#f); fprintf(stderr,"\n"); exit(1); } }
+
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+typedef pair<int,int> PII;
+typedef vector<PII> VPII;
+typedef vector<double> VD;
+typedef pair<double,double> PDD;
+
+const int inf=1000000000;
+const LL INF=LL(inf)*inf;
+const double eps=1e-9;
+const double PI=2*acos(0.0);
+#define bit(n) (1<<(n))
+#define bit64(n) ((LL(1))<<(n))
+#define pb push_back
+#define sz size()
+#define mp make_pair
+#define cl clear()
+#define all(a) (a).begin(),(a).end()
+#define fill(ar,val) memset((ar),(val),sizeof (ar))
+void MIN(int& a,int b) {if((a)>(b)) (a)=(b);}
+#define MAX(a,b) {if((a)<(b)) (a)=(b);}
+#define sqr(x) ((x)*(x))
+#define X first
+#define Y second
+
+//clock_t start=clock();
+//fprintf(stderr,"time=%.3lfsec\n",0.001*(clock()-start));
+
+typedef unsigned int uint;
+enum endl_faszom { endl };
+template <size_t max_input_size,size_t max_output_size>
+struct fast_io
+{
+        fast_io(): input_size(0), s(input), d(output)
+            {
+                        read();
+                            }
+                                ~fast_io()
+                                    {
+                                                write();
+                                                    }
+                                                        void read()
+                                                            {
+                                                                        input_size=fread(input,1,max_input_size,stdin);
+                                                                                input[input_size]=0;
+                                                                                        s=input;
+                                                                                            }
+                                                                                                void write()
+                                                                                                    {
+                                                                                                                fwrite(output,1,d-output,stdout);
+                                                                                                                        d=output;
+                                                                                                                            }
+                                                                                                                                void skip_blank()
+                                                                                                                                    {
+                                                                                                                                                while(0<*s && *s<=32)
+                                                                                                                                                                ++s;
+                                                                                                                                                                    }
+                                                                                                                                                                        uint read_uint()
+                                                                                                                                                                            {
+                                                                                                                                                                                        uint r=0;
+                                                                                                                                                                                                while('0'<=*s && *s<='9')
+                                                                                                                                                                                                                r=r*10+ *s++ -'0';
+                                                                                                                                                                                                                        return r;
+                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                int read_int()
+                                                                                                                                                                                                                                    {
+                                                                                                                                                                                                                                                int r=0;
+                                                                                                                                                                                                                                                        bool neg=0;
+                                                                                                                                                                                                                                                                if(*s=='-' || *s=='+')
+                                                                                                                                                                                                                                                                                neg=*s++=='-';
+                                                                                                                                                                                                                                                                                        while('0'<=*s && *s<='9')
+                                                                                                                                                                                                                                                                                                        r=r*10+ *s++ -'0';
+                                                                                                                                                                                                                                                                                                                return neg?-r:r;
+                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                        fast_io& operator>> (uint &r)
+                                                                                                                                                                                                                                                                                                                            {
+                                                                                                                                                                                                                                                                                                                                        skip_blank();
+                                                                                                                                                                                                                                                                                                                                                r=read_uint();
+                                                                                                                                                                                                                                                                                                                                                        return *this;
+                                                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                                                fast_io& operator>> (int &r)
+                                                                                                                                                                                                                                                                                                                                                                    {
+                                                                                                                                                                                                                                                                                                                                                                                skip_blank();
+                                                                                                                                                                                                                                                                                                                                                                                        r=read_int();
+                                                                                                                                                                                                                                                                                                                                                                                                return *this;
+                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                        fast_io& operator<< (uint x)
+                                                                                                                                                                                                                                                                                                                                                                                                            {
+                                                                                                                                                                                                                                                                                                                                                                                                                        char buf[32],*e=buf+32,*p=e;
+                                                                                                                                                                                                                                                                                                                                                                                                                                while(*--p='0'+x%10,x/=10,x);
+                                                                                                                                                                                                                                                                                                                                                                                                                                        while(p!=e)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        *d++=*p++;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                return *this;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        fast_io& operator<< (int x)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        if(x<0)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    *d++='-';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                return operator<< (uint(-x));
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                else return operator<< (uint(x));
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        fast_io& operator<< (endl_faszom x)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        *d++='\n';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                return *this;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        fast_io& operator>> (char &r)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        r=*s++;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                return *this;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        fast_io& operator<< (char c)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        *d++=c;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                return *this;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        fast_io& operator<< (char const *p)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        while(*p)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        *d++=*p++;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                return *this;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        size_t input_size;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            char input[max_input_size+1];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                char const *s;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    char output[max_output_size+1];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        char *d;
+};
+fast_io<8*1024*1024,8*1024*1024> io;
+
+
+#define N 10101010
+int minp[N];
+int pr[700000];
+
+VPII factor(int n) {
+      VPII res;
+        for(;n>1;) {
+                int p=minp[n];
+                    int k=0;
+                        for(;n%p==0;n/=p) k++;
+                            res.pb(mp(p,k));
+                              }
+                                if(n>1) res.pb(mp(n,1));
+                                  return res;
+}
+
+int gcd(int a,int b)
+{
+        int c;
+            while(b)c=a%b,a=b,b=c;
+                return a;
+}
+
+typedef map<int,int> MII;
+
+void fib_per_prime(int p, int k, MII& fct) {
+      VPII f1;
+        if(p==5) {
+                f1 = factor(20);
+                  } else if(p%5==1 || p%5==4) {
+                          f1 = factor(p-1);
+                            } else {
+                                      f1 = factor(p+1); 
+                                          if(f1[0].X==2) f1[0].Y++; else
+                                                    f1.pb(mp(2,1));
+                                                      }
+                                                        for(int i=0;i<f1.sz;i++)
+                                                                MAX(fct[f1[i].X], f1[i].Y);
+}
+
+int POW(int a,int n)
+{
+        int p=1;
+            while(n--) p*=a;
+                return p;
+}
+
+int fib_per(int m)
+{
+        VPII x=factor(m);
+            MII fct;
+                for(int i=x.sz;i--;)
+                            fib_per_prime(x[i].X, x[i].Y, fct);
+                              int per=1;
+                                for(MII::iterator it=fct.begin();it!=fct.end();++it) {
+                                        per*=POW(it->X, it->Y);
+                                          }
+                                            return per;
+}
+
+struct matr
+{
+        int _[2][2];
+            matr(){}
+                matr(int a00,int a01,int a10,int a11){_[0][0]=a00;_[0][1]=a01;_[1][0]=a10;_[1][1]=a11;}
+};
+
+void mull(matr &a,const matr &b,int mod)
+{
+        matr c;
+            for(int i=0;i<2;i++)
+                        for(int j=0;j<2;j++)
+                                    c._[i][j] = (LL(a._[i][0])*b._[0][j] + LL(a._[i][1])*b._[1][j]) % mod;
+                                        a=c;
+}
+
+int fib_mod(int n,int mod)
+{
+        matr a(1,1,1,0);
+            matr p(1,0,0,1);
+                for(;n;)
+                        {
+                                    if(n%2) mull(p,a,mod);
+                                            if(n/=2) mull(a,a,mod);
+                                                }
+                                                    return p._[1][0];
+}
+
+int inv(int a,int P)
+{
+        int x0=1,x1=0,x;
+            int b=P,c;
+                while(b)
+                        {
+                                    int q=a/b;
+                                            c=a-q*b;a=b;b=c;
+                                                    x=x0-q*x1;x0=x1;x1=x;
+                                                        }
+                                                            return x0<0?x0+P:x0;
+}
+
+int facdeg(int n,int p) {
+      int s=0;
+        for(;n;n/=p)
+                s+=n/p;
+                  return s;
+}
+
+int Cnk(int n,int k,int mod) {
+      VPII f = factor(mod);
+        if(k>n-k) k=n-k;
+          int R=0,M=1;
+            for(int i=0;i<f.sz;i++) {
+                    int p=f[i].X;
+                        int d=f[i].Y;
+                            int m=1;
+                                for(int j=0;j<d;j++) m*=p;
+                                    int r;
+                                        int DEG = facdeg(n,p) - facdeg(k,p) - facdeg(n-k,p);
+                                            if(DEG >= d) r=0; else {
+                                                      r=1;
+                                                            int deg=0;
+                                                                  for(int j=1;j<=k;j++) {
+                                                                              int x=n-j+1;
+                                                                                      for(;x%p==0;x/=p) deg++;
+                                                                                              r = LL(r) * x % m;
+                                                                                                      x = j;
+                                                                                                              for(;x%p==0;x/=p) deg--;
+                                                                                                                      r = LL(r) * inv(x, m) % m;
+                                                                                                                            }
+                                                                                                                                  if(deg>=d) r=0; else
+                                                                                                                                              for(;deg--;) r=LL(r)*p%m;
+                                                                                                                                                  }
+                                                                                                                                                      int y = LL(r-R) * inv(M, m) % m;
+                                                                                                                                                          if(y<0) y+=m;
+                                                                                                                                                              R+=y*M;
+                                                                                                                                                                  M*=m;
+                                                                                                                                                                    }
+                                                                                                                                                                      return R;
+}
+
+LL Cnk(int n,int k) {
+      LL p = 1;
+        for(int j=1;j<=k && p<2*inf;j++) {
+                p=p*(n-j+1)/j;
+                  }
+                    return p;
+}
+
+int main()
+{
+#ifndef ONLINE_JUDGE
+      freopen("f.in","r",stdin);
+        freopen("f.out","w",stdout);
+#else
+          struct rlimit rl;
+            rl.rlim_cur = 64 * 1024 * 1024;
+              setrlimit(RLIMIT_STACK, &rl);
+#endif
+                /*for(int p=2,n;(n=p*p)<N;p++) if(!minp[p])
+                    for(;n<N;n+=p) if(!minp[n]) minp[n]=p;
+                      for(int p=2;p<N;p++)
+                              if(!minp[p]) minp[p]=p;*/
+                                    int len=0;
+                                      for (int i=2; i<N; ++i) {
+                                              if (minp[i] == 0) {
+                                                            minp[i] = i;
+                                                                    pr[len++] = i;
+                                                                          }
+                                                                              for (int j=0; j<len && pr[j]<=minp[i] && i*pr[j]<N; ++j)
+                                                                                        minp[i * pr[j]] = pr[j];
+                                                                                          }
+                                                                                            int T;
+                                                                                              io >> T;
+                                                                                                for(;T--;) {
+                                                                                                        int n,k,m;
+                                                                                                            io >> n >> k >> m;
+                                                                                                                if(k>n || m<=1) { io << 0 << endl; continue; }
+                                                                                                                    if(k>n-k) k=n-k;
+                                                                                                                        LL cnk = Cnk(n,k);
+                                                                                                                            int res;
+                                                                                                                                if(cnk<2*inf) {
+                                                                                                                                          res = fib_mod(cnk, m);
+                                                                                                                                              } else {
+                                                                                                                                                        int pm = fib_per(m);
+                                                                                                                                                              int r = Cnk(n,k,pm);
+                                                                                                                                                                    res = fib_mod(r,m);
+                                                                                                                                                                        }
+                                                                                                                                                                            io << res << endl;
+                                                                                                                                                                              }
+                                                                                                                                                                                return 0;
+}

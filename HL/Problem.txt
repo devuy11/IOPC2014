@@ -1,0 +1,32 @@
+Given a tree. Two Queries.(Medium/HARD)
+
+U v s :: add s to all nodes in the subtree rooted at v.
+
+Q a b: Find sum from a to b mod M.
+
+Input Format::
+First line contains 3 space separated integer( N Q root) 
+Next N-1 lines contains description of the graph
+Next Q lines (each line either of the form U v s OR Q a b)
+
+Output Format::
+Output the Answer for all Q type queries in a separate line.
+
+Sample Input::
+5 3 1
+1 2
+1 3
+3 4
+3 5
+U 3 5
+Q 4 5
+Q 4 1
+
+Sample Output
+15
+10
+
+Constraints:
+N<=1e5
+Q<=1e5
+mod(s)<=1000

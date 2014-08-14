@@ -1,0 +1,15 @@
+T test cases:
+
+Calculate Fib(nCr)%m::
+
+
+Fib(i) = Fib(i-1) + Fib(i-2)   -->  Fib(0)=0 and Fib(1)=1 
+
+nCr => number of ways of choosing r objects out of n objects.
+
+Constraints::
+
+1<=r<=n<=100000
+m<=1e7
+Summation n over all T is less than or equal to 100000
+n and r are coprime to m // For trolling :D

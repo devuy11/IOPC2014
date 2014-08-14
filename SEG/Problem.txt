@@ -1,0 +1,38 @@
+Given an empty array(named array[]) of size N.   
+
+There are 2 types of Queries ::
+
+U X Y D
+
+For each i from X to Y
+
+array[ i ]  = array[i] +  (i-X) * D  + (i-X)*(i-X) * D*D  + (i-X)*(i-X)*(i-X) * D* D*D	(array[] is 1 indexed)
+
+Q X Y :: print Sum From (array[X]+.......+ array[Y]) % (1e9+7)
+
+Input Format::
+First Line contains 2 space separated Integer ( N and Q)
+Next Q lines follow which will either be of form (U X Y D) OR (Q X Y) without brackets.
+
+Output Format ::
+For each Query of type Q output the anwer as required
+
+Sample Input::
+4 2
+U 1 4 2
+Q 2 3
+
+Sample Output::
+98
+
+Explanation::
+
+After Update the Array Becomes :: 0 14 84 258
+So For Query 2 3 :: 14 + 84 = 98
+
+
+Constraints ::
+
+N<=1e5
+1<=X<=Y<=N
+D<=100

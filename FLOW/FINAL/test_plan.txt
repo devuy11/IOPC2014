@@ -1,0 +1,14 @@
+Every File wil have T=50 and every T will have N=100
+Out of these 50 T cases , 45 are of the form where Value of the product J < C and 5 cases have J>=C
+
+Each File will be based on interval partitioning
+1) 100 different intervals
+2) 90 ...................(rest 10 should be choosen as a subinterval in the 90 intervals)
+3) Similarly for 80
+4) Similarly for 70
+5) Similarly for 60
+6) Similarly for 50
+7) Similarly for 30
+8) Similarly for 10
+9) Similarly for 1
+10) All Intervals have same S[i] and E[i]
